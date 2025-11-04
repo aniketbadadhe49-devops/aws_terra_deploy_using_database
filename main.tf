@@ -6,6 +6,7 @@ resource "aws_vpc" "main" {
     }
 }
 
+
 #Subnet
 resource "aws_subnet" "main" {
   vpc_id = aws_vpc.main.id
