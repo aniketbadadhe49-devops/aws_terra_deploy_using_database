@@ -82,7 +82,7 @@ data "aws_ami" "ubuntu" {
   most_recent = true
   filter {
     name = "name"
-    values = = ["ubuntu/images/hmv-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+    values = ["ubuntu/images/hmv-ssd/ubuntu-jammy-22.04-amd64-server-*"]
 
   }
 
