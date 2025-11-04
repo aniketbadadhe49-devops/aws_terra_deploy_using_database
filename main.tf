@@ -36,7 +36,7 @@ resource "aws_rout_table_association" "a" {
 }
 
 # Securatygroup
-resource "aws_securaty_group" "vm_sg" {
+resource "aws_security_group" "vm_sg" {
   name ="vm_sg"
   description = "Allow SSH and HTTP"
   vpc_id = aws_vpc.main.id
@@ -98,3 +98,15 @@ value = data.aws_ami.ubuntu
 }
 
 # EC2
+resource "aws_instance" "vm" {
+  ami        = data_aws_ami.ubuntu.id
+  instance_id = var.instance_type
+  subnet_id   = aws_subnet.main.id
+  vpc_security_group_ids = [aws_security_group.vm_sg.id]
+  key_name = aws_key_pair.deployer_key.key_name
+
+  tags = {
+    Name = "ubuntu-server"
+  }
+
+}
