@@ -1,0 +1,39 @@
+  name: "Terraform aws deploy"
+  on: workflow_dispatch
+
+  jobs:
+     terraform:
+     name: "Terraform Apply"
+     runs-on: ubuntu-latest
+
+     env:
+
+       AWS_ACCESS_KEY_ID=${{secrete.AWS_ACCESS_KET_ID}}
+       AWS_SECRET_ACCESS_KEY=${{secrete.AWS_SECRET_ACCESS_KEY}}
+
+     steps:
+         - name: Checkout Repo
+           uses: actions/checkout@v4
+
+         - name: Terraform install manualy
+           run: | 
+              sudo apt upgrade-y 
+              sudo apt install -y wget unzip
+              wget https://releases.hashicorp.com/terraform/1.13.4/terraform_1.13.4_linux_amd64.zip
+              unzip  terraform_1.13.4_linux_amd64.zip
+              sudo mv terraform /usr/loacl/bin/
+              
+          - name: Terraform Init
+             run: terraform init
+
+          - name: Terraform Validate
+             run: terraform validate
+
+          - name: Terraform Plan
+             run: terraform plan -var ="aws_access_key_id=${AWS_ACCESS_KET_ID}" -var="aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}"
+
+           # -name: Terraform Apply
+           #   run: terraform apply auto-approve -var ="aws_access_key_id=${AWS_ACCESS_KET_ID}" -var="aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}"
+
+     
+
