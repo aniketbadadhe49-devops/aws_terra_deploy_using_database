@@ -7,17 +7,16 @@ terraform {
     }
 }
    # 👇 Local backend (stores terraform.tfstate locally)
-  backend "local" {
-    path = "terraform.tfstate"
-  }
-}
+ # backend "local" {
+  #  path = "terraform.tfstate"
+ # }
+#}
 
   backend "s3" {
     bucket         = "aniket-s3-tfstate-bucket-name"  # Replace with your S3 bucket name
     key            = "terraform.tfstate" # Path within the bucket
-    region         = "us-east-1"                   # AWS region where the bucket resides
-    encrypt        = true                          # Optional: Encrypt the state file at rest
-    dynamodb_table = "your-dynamodb-lock-table"    # Optional: For state locking (recommended)
+    region         = "ap-south-1"                   # AWS region where the bucket resides
+    
   }
 }
 provider "aws" {
