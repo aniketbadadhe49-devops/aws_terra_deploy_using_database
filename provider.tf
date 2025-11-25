@@ -13,7 +13,7 @@ terraform {
 #}
 
   backend "s3" {
-    bucket         = "aniket-s3-tfstate-bucket-name"  # Replace with your S3 bucket name
+    bucket         = "aniket-s3-tfstate-storege"  # Replace with your S3 bucket name
     key            = "terraform.tfstate" # Path within the bucket
     region         = "ap-south-1"                   # AWS region where the bucket resides
     
